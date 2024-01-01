@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="body-html">
+    
+    <!-- definitions for the SVG. this is used to keep the SVGs above from repeating a ton of code -->
+    <svg id="lights-def" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" viewBox="0 0 161 54">
+        <defs>
+            <path id="glow-red" fill="color(display-p3 .9216 .3412 .3412)" d="m137.32 16.43 2.03-1.58a4 4 0 0 1 2.95-.82l1.68.2a4 4 0 0 1 2.66 1.51l1.59 2.04a10 10 0 0 1 1.03 10.7l-5.4 10.59a4 4 0 0 1-7.47-.92l-2.66-11.6a10 10 0 0 1 3.59-10.12Z" />
+            <path id="glow-blue" fill="color(display-p3 .1765 .6118 .8588)" d="m93.23 18.08 1.5-2.1a4 4 0 0 1 2.6-1.61l1.67-.28a4 4 0 0 1 2.98.7l2.1 1.5a10 10 0 0 1 3.99 9.98l-2.2 11.69a4 4 0 0 1-7.42 1.22L92.63 28.8a10 10 0 0 1 .6-10.72Z" />
+            <path id="glow-yellow" fill="color(display-p3 .949 .7882 .298)" d="m56.6 16.63 1.96-1.69a4 4 0 0 1 2.91-.95l1.68.12a4 4 0 0 1 2.74 1.38l1.68 1.96a10 10 0 0 1 1.53 10.63l-4.89 10.84a4 4 0 0 1-7.5-.56L53.5 26.91a10 10 0 0 1 3.1-10.28Z" />
+            <path id="glow-green" fill="color(display-p3 .1529 .6824 .3765)" d="m13.12 18.14 1.49-2.1a4 4 0 0 1 2.58-1.64l1.67-.29a4 4 0 0 1 2.98.68l2.11 1.48a10 10 0 0 1 4.08 9.94l-2.1 11.7a4 4 0 0 1-7.42 1.29l-5.9-10.33a10 10 0 0 1 .5-10.73Z" />
+            <path id="lit-red" fill="#fff" d="m137.32 16.43 2.03-1.58a4 4 0 0 1 2.95-.82l1.68.2a4 4 0 0 1 2.66 1.51l1.59 2.04a10 10 0 0 1 1.03 10.7l-5.4 10.59a4 4 0 0 1-7.47-.92l-2.66-11.6a10 10 0 0 1 3.59-10.12Z" />
+            <path id="lit-blue" fill="#fff" d="m93.23 18.08 1.5-2.1a4 4 0 0 1 2.6-1.61l1.67-.28a4 4 0 0 1 2.98.7l2.1 1.5a10 10 0 0 1 3.99 9.98l-2.2 11.69a4 4 0 0 1-7.42 1.22L92.63 28.8a10 10 0 0 1 .6-10.72Z" />
+            <path id="lit-yellow" fill="#fff" d="m56.6 16.63 1.96-1.69a4 4 0 0 1 2.91-.95l1.68.12a4 4 0 0 1 2.74 1.38l1.68 1.96a10 10 0 0 1 1.53 10.63l-4.89 10.84a4 4 0 0 1-7.5-.56L53.5 26.91a10 10 0 0 1 3.1-10.28Z" />
+            <path id="lit-green" fill="#fff" d="m13.12 18.14 1.49-2.1a4 4 0 0 1 2.58-1.64l1.67-.29a4 4 0 0 1 2.98.68l2.11 1.48a10 10 0 0 1 4.08 9.94l-2.1 11.7a4 4 0 0 1-7.42 1.29l-5.9-10.33a10 10 0 0 1 .5-10.73Z" />
+            <g id="holiday-lights" clip-path="url(#a)">
+                <path id="cord" fill="color(display-p3 .0471 .1961 .1137)" d="M0 4h6.31a6 6 0 0 1 3.13.88l6.6 4.04c.6.36 1.34.4 1.96.08l6.13-3.68a6 6 0 0 1 2.97-.85l21.7-.45a6 6 0 0 1 2.31.42l9.77 3.82a5.3 5.3 0 0 0 3.88 0l7.09-2.8a6 6 0 0 1 2.39-.42l13.33.42a6 6 0 0 1 2.69.73l3.82 2.08a6 6 0 0 0 3.3.72l.56-.04a6 6 0 0 0 1.22-.21l10.61-3.03a6 6 0 0 1 1.49-.23l21.77-.6a6 6 0 0 1 2.8.61l6.84 3.35a3.47 3.47 0 0 0 3.66-.39l4.04-3.17a6 6 0 0 1 3.7-1.28H161v2h-6.3a6 6 0 0 0-3.88 1.42l-2.81 2.38a6 6 0 0 1-4.62 1.37l-.32-.04a6 6 0 0 1-2.02-.62l-5.67-2.95a6 6 0 0 0-2.93-.67l-20.7.59c-.5.01-1 .09-1.48.23l-10.55 3.03a6 6 0 0 1-1.21.21l-.7.06a6 6 0 0 1-2.98-.55l-5.22-2.44a6 6 0 0 0-2.34-.56l-12.53-.42a6 6 0 0 0-2.4.42l-7.04 2.78a6 6 0 0 1-2.7.4l-.73-.07a6 6 0 0 1-1.69-.39l-9.56-3.74a6 6 0 0 0-2.32-.41l-20.7.44a6 6 0 0 0-2.97.85l-5.67 3.4a3.63 3.63 0 0 1-3.76-.02L8.94 6.89A6 6 0 0 0 5.81 6H0V4Z" />
+                <g class="bulb-glow red" filter="url(#b)" style="mix-blend-mode:plus-lighter">
+                    <use xlink:href="#glow-red" />
+                </g>
+                <g id="plug-red">
+                    <path fill="color(display-p3 .0486 .196 .1119)" d="M140 10.89c.02-.11.06-.22.16-.27.25-.12 1.03-.26 3.4.04 2.38.29 3.1.61 3.32.8.09.06.1.18.1.29l-.05 4.36s-.57-1.58-3.8-1.98c-3.22-.4-4.14 1-4.14 1l1-4.24Z" />
+                    <g filter="url(#d)" style="mix-blend-mode:color-dodge">
+                        <path fill="color(display-p3 .0578 .3504 .1908)" d="m139.85 14.23.9-3.16 3.47.42-2.6.69-1.77 2.05Z" />
+                    </g>
+                </g>
+                <g id="bulb-red">
+                    <path fill="color(display-p3 .9216 .3412 .3412)" stroke="color(display-p3 .8784 .8784 .8784)" stroke-width=".25" d="m137.32 16.43 2.03-1.58a4 4 0 0 1 2.95-.82l1.68.2a4 4 0 0 1 2.66 1.51l1.59 2.04a10 10 0 0 1 1.03 10.7l-5.4 10.59a4 4 0 0 1-7.47-.92l-2.66-11.6a10 10 0 0 1 3.59-10.12Z" />
+                    <g filter="url(#e)" style="mix-blend-mode:overlay">
+                        <path fill="#fff" d="M135.92 19.54c1.98-2.78 3.37-2.78 4.4-2.98l-1.37 1.46a10 10 0 0 0-2.7 6.43l-.16 3.93c-.49-2.16-2.15-6.06-.17-8.84Z" />
+                    </g>
+                    <g filter="url(#f)" opacity=".6" style="mix-blend-mode:plus-lighter">
+                        <path fill="#fff" d="m140.59 26.66 2.59-8.75 3.35 3.44.5 4.1-6.2 11.57-.24-10.36Z" />
+                    </g>
+                </g>
+                <g class="bulb-glow blue" filter="url(#g)" style="mix-blend-mode:plus-lighter">
+                    <use xlink:href="#glow-blue" />
+                </g>
+                <g id="plug-blue">
+                    <path fill="color(display-p3 .0486 .196 .1119)" d="M94.24 12c-.01-.1 0-.22.08-.3.2-.18.92-.54 3.28-.92 2.36-.4 3.15-.28 3.4-.17.1.04.15.15.18.25l1.18 4.2s-.99-1.36-4.2-.83c-3.2.53-3.7 2.13-3.7 2.13L94.24 12Z" />
+                    <g filter="url(#i)" style="mix-blend-mode:color-dodge">
+                        <path fill="color(display-p3 .0578 .3504 .1908)" d="m95.04 15.25-.03-3.29 3.45-.56-2.3 1.39-1.12 2.46Z" />
+                    </g>
+                </g>
+                <g id="bulb-blue">
+                    <path fill="color(display-p3 .1765 .6118 .8588)" stroke="color(display-p3 .8784 .8784 .8784)" stroke-width=".25" d="m93.23 18.08 1.5-2.1a4 4 0 0 1 2.6-1.61l1.67-.28a4 4 0 0 1 2.98.7l2.1 1.5a10 10 0 0 1 3.99 9.98l-2.2 11.69a4 4 0 0 1-7.42 1.22L92.63 28.8a10 10 0 0 1 .6-10.72Z" />
+                    <g filter="url(#j)" style="mix-blend-mode:overlay">
+                        <path fill="#fff" d="M92.76 21.45c1.12-3.22 2.45-3.61 3.39-4.1l-.9 1.79a10 10 0 0 0-.79 6.93l.95 3.81c-1.07-1.93-3.76-5.2-2.65-8.43Z" />
+                    </g>
+                    <g filter="url(#k)" opacity=".6" style="mix-blend-mode:plus-lighter">
+                        <path fill="#fff" d="m99.24 26.97.03-9.12 4.18 2.35 1.65 3.8-2.7 12.86-3.15-9.88Z" />
+                    </g>
+                </g>
+                <g class="bulb-glow yellow" filter="url(#l)" style="mix-blend-mode:plus-lighter">
+                    <use xlink:href="#glow-yellow" />
+                </g>
+                <g id="plug-yellow">
+                    <path fill="color(display-p3 .0486 .196 .1119)" d="M59.02 10.96c.02-.11.05-.22.15-.27.25-.13 1.02-.31 3.4-.13 2.4.18 3.13.47 3.36.63.09.07.1.19.1.3l.16 4.36s-.64-1.56-3.88-1.8c-3.24-.24-4.1 1.2-4.1 1.2l.8-4.3Z" />
+                    <g filter="url(#n)" style="mix-blend-mode:color-dodge">
+                        <path fill="color(display-p3 .0578 .3504 .1908)" d="m59.03 14.3.75-3.2 3.49.26-2.57.81-1.67 2.13Z" />
+                    </g>
+                </g>
+                <g id="bulb-yellow">
+                    <path fill="color(display-p3 .949 .7882 .298)" stroke="color(display-p3 .8784 .8784 .8784)" stroke-width=".25" d="m56.6 16.63 1.96-1.69a4 4 0 0 1 2.91-.95l1.68.12a4 4 0 0 1 2.74 1.38l1.68 1.96a10 10 0 0 1 1.53 10.63l-4.89 10.84a4 4 0 0 1-7.5-.56L53.5 26.91a10 10 0 0 1 3.1-10.28Z" />
+                    <g filter="url(#o)" style="mix-blend-mode:overlay">
+                        <path fill="#fff" d="M55.36 19.8c1.85-2.88 3.23-2.94 4.25-3.2l-1.3 1.53a10 10 0 0 0-2.38 6.55l.02 3.93c-.59-2.13-2.43-5.95-.59-8.82Z" />
+                    </g>
+                    <g filter="url(#p)" opacity=".6" style="mix-blend-mode:plus-lighter">
+                        <path fill="#fff" d="m60.36 26.69 2.17-8.86 3.51 3.27.7 4.06-5.65 11.86-.73-10.33Z" />
+                    </g>
+                </g>
+                <g class="bulb-glow green" filter="url(#q)" style="mix-blend-mode:plus-lighter">
+                    <use xlink:href="#glow-green" />
+                </g>
+                <g id="plug-green">
+                    <path fill="color(display-p3 .0486 .196 .1119)" d="M14.08 12.06c-.01-.11 0-.23.07-.3.21-.19.92-.55 3.28-.95 2.36-.41 3.14-.3 3.4-.2.1.04.15.15.18.25l1.21 4.2s-1-1.36-4.2-.8c-3.2.55-3.68 2.15-3.68 2.15l-.26-4.35Z" />
+                    <g filter="url(#s)" style="mix-blend-mode:color-dodge">
+                        <path fill="color(display-p3 .0578 .3504 .1908)" d="m14.9 15.3-.05-3.29 3.45-.6-2.3 1.42-1.1 2.47Z" />
+                    </g>
+                </g>
+                <g id="bulb-green">
+                    <path fill="color(display-p3 .1529 .6824 .3765)" stroke="color(display-p3 .8784 .8784 .8784)" stroke-width=".25" d="m13.12 18.14 1.49-2.1a4 4 0 0 1 2.58-1.64l1.67-.29a4 4 0 0 1 2.98.68l2.11 1.48a10 10 0 0 1 4.08 9.94l-2.1 11.7a4 4 0 0 1-7.42 1.29l-5.9-10.33a10 10 0 0 1 .5-10.73Z" />
+                    <g filter="url(#t)" style="mix-blend-mode:overlay">
+                        <path fill="#fff" d="M12.68 21.52c1.1-3.23 2.42-3.63 3.35-4.13l-.9 1.8a10 10 0 0 0-.71 6.93l.98 3.8c-1.1-1.92-3.8-5.17-2.72-8.4Z" />
+                    </g>
+                    <g filter="url(#u)" opacity=".6" style="mix-blend-mode:plus-lighter">
+                        <path fill="#fff" d="m19.2 26.99-.04-9.12 4.2 2.31 1.67 3.78-2.6 12.87L19.2 27Z" />
+                    </g>
+                </g>
+                <g class="lit red" style="mix-blend-mode:overlay">
+                    <g filter="url(#v)">
+                        <use xlink:href="#glow-red" />
+                    </g>
+                    <g filter="url(#w)">
+                        <use xlink:href="#lit-red" />
+                    </g>
+                    <g filter="url(#y)">
+                        <use xlink:href="#lit-red" />
+                    </g>
+                </g>
+                <g class="lit blue" style="mix-blend-mode:overlay">
+                    <g filter="url(#z)">
+                        <use xlink:href="#glow-blue" />
+                    </g>
+                    <g filter="url(#A)">
+                        <use xlink:href="#lit-blue" />
+                    </g>
+                    <g filter="url(#C)">
+                        <use xlink:href="#lit-blue" />
+                    </g>
+                </g>
+                <g class="lit yellow" style="mix-blend-mode:overlay">
+                    <g filter="url(#D)">
+                        <use xlink:href="#glow-yellow" />
+                    </g>
+                    <g filter="url(#E)">
+                        <use xlink:href="#lit-yellow" />
+                    </g>
+                    <g filter="url(#G)">
+                        <use xlink:href="#lit-yellow" />
+                    </g>
+                </g>
+                <g class="lit green" style="mix-blend-mode:overlay">
+                    <g filter="url(#H)">
+                        <use xlink:href="#glow-green" />
+                    </g>
+                    <g filter="url(#I)">
+                        <use xlink:href="#lit-green" />
+                    </g>
+                    <g filter="url(#K)">
+                        <use xlink:href="#lit-green" />
+                    </g>
+                </g>
+            </g>
+            <filter id="b" width="40.88" height="51.25" x="121.47" y="2" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="6" />
+            </filter>
+            <filter id="d" width="6.37" height="5.16" x="138.85" y="10.07" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation=".5" />
+            </filter>
+            <filter id="e" width="8.34" height="14.82" x="133.48" y="15.05" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation=".75" />
+            </filter>
+            <filter id="f" width="14.45" height="27.11" x="136.59" y="13.91" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="2" />
+            </filter>
+            <filter id="g" width="40.89" height="51.18" x="79.35" y="2.04" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="6" />
+            </filter>
+            <filter id="i" width="5.45" height="5.85" x="94.01" y="10.4" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation=".5" />
+            </filter>
+            <filter id="j" width="6.65" height="15.53" x="91" y="15.85" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation=".75" />
+            </filter>
+            <filter id="k" width="13.84" height="27" x="95.24" y="13.85" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="2" />
+            </filter>
+            <filter id="l" width="40.86" height="51.3" x="41.13" y="1.97" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="6" />
+            </filter>
+            <filter id="n" width="6.23" height="5.2" x="58.03" y="10.1" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation=".5" />
+            </filter>
+            <filter id="o" width="8.05" height="15.01" x="53.06" y="15.1" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation=".75" />
+            </filter>
+            <filter id="p" width="14.38" height="27.2" x="56.36" y="13.83" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="2" />
+            </filter>
+            <filter id="q" width="40.9" height="51.16" x="-.71" y="2.05" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="6" />
+            </filter>
+            <filter id="s" width="5.45" height="5.88" x="13.85" y="10.42" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation=".5" />
+            </filter>
+            <filter id="t" width="6.6" height="15.54" x="10.93" y="15.89" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation=".75" />
+            </filter>
+            <filter id="u" width="13.87" height="26.97" x="15.15" y="13.87" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="2" />
+            </filter>
+            <filter id="v" width="40.88" height="51.25" x="121.47" y="2" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="6" />
+            </filter>
+            <filter id="w" width="30.88" height="41.25" x="126.47" y="7" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="3.5" />
+            </filter>
+            <filter id="y" width="20.88" height="31.25" x="131.47" y="12" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="1" />
+            </filter>
+            <filter id="z" width="40.89" height="51.18" x="79.35" y="2.04" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="6" />
+            </filter>
+            <filter id="A" width="30.89" height="41.18" x="84.35" y="7.04" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="3.5" />
+            </filter>
+            <filter id="C" width="20.89" height="31.18" x="89.35" y="12.04" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="1" />
+            </filter>
+            <filter id="D" width="40.86" height="51.3" x="41.13" y="1.97" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="6" />
+            </filter>
+            <filter id="E" width="30.86" height="41.3" x="46.13" y="6.97" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="3.5" />
+            </filter>
+            <filter id="G" width="20.86" height="31.3" x="51.13" y="11.97" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="1" />
+            </filter>
+            <filter id="H" width="40.9" height="51.16" x="-.71" y="2.05" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="6" />
+            </filter>
+            <filter id="I" width="30.9" height="41.16" x="4.29" y="7.05" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="3.5" />
+            </filter>
+            <filter id="K" width="20.9" height="31.16" x="9.29" y="12.05" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                <feGaussianBlur result="effect1_foregroundBlur_1_2" stdDeviation="1" />
+            </filter>
+            <clipPath id="a">
+                <path fill="#fff" d="M0 0h161v54H0z" />
+            </clipPath>
+        </defs>
+    </svg>
+
+    <div style="display:none">
+        <svg version="1.1" id="bell" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"  xml:space="preserve">
+            <style type="text/css">
+                .st0{fill:#ffcc00;}
+            </style>
+            <g>
+                <path class="st0" d="M310.308,86.496c13.919,9.238,32.698,5.438,41.918-8.481c9.238-13.911,5.429-32.689-8.473-41.91
+                    c-13.919-9.237-32.679-5.437-41.918,8.482C292.598,58.498,296.407,77.276,310.308,86.496z"/>
+                <path class="st0" d="M371.681,127.203c13.919,9.229,32.679,5.429,41.899-8.472c9.238-13.929,5.447-32.698-8.473-41.927
+                    c-13.918-9.229-32.679-5.438-41.918,8.481C353.953,99.205,357.761,117.966,371.681,127.203z"/>
+                <path class="st0" d="M289.678,129.509c-9.22,13.91-5.429,32.689,8.491,41.908c13.901,9.238,32.679,5.447,41.918-8.472
+                    c9.22-13.928,5.429-32.698-8.491-41.918C317.677,111.789,298.9,115.589,289.678,129.509z"/>
+                <path class="st0" d="M39.935,98.671c29.476,15.129,63.455,53.78,67.3,82.384c3.133,23.113,45.442-58.542,82.287,6.951
+                    c12.264-8.775,34.69-43.502,70.949-22.712c3.043-5.633,7.422-10.839,12.442-15.539c-0.801-9.14,1.37-18.618,6.817-26.842
+                    c0.748-1.104,1.514-2.162,2.332-3.194c-36.952-3.098-89.781-8.696-89.318-15.477c0.641-10.421,125.629-2.101,125.629-2.101
+                    s-36.881-21.964-50.693-49.838c-38.608,16.038-56.442-21.306-67.478-31.558c-44.855,60.304-76.467-26.085-82.518-3.515
+                    c-7.423,27.865-45.567,63.428-77.232,73.111C36.767,91.471,33.474,95.405,39.935,98.671z"/>
+                <path class="st0" d="M474.188,204.427c-13.741-6.177-55.054-8.126-55.285-49.919c-31.042-1.877-65.626-27.331-65.626-27.331
+                    S409.522,239.1,400.16,243.763c-6.069,3.016-31.736-43.369-48.931-76.173c-0.409,0.676-0.783,1.317-1.21,1.958
+                    c-5.553,8.366-13.599,14.079-22.498,16.874c-2.457,6.88-5.679,13.368-9.914,18.672c33.232,25.328,9.967,59.468,6.621,74.206
+                    c74.687,8.482,15.913,79.226,38.429,73.093c27.857-7.61,76.627,8.704,102.063,30.001c5.536,4.646,7.885,0.08,7.476-3.72
+                    c-3.382-32.964,14.524-81.922,37.326-99.632C527.978,264.704,436.097,269.18,474.188,204.427z"/>
+                <path class="st0" d="M342.151,298.337c-3.381-2.243-7.92-3.925-13.545-5.118c-3.15,11.953-7.298,24.092-12.193,36.195
+                    c-23.068,56.967-8.01,78.727-8.864,105.311c-45.388-14.418-92.985-37.058-139.156-67.683
+                    c-46.172-30.615-85.526-65.68-116.444-101.884c24.136-11.116,50.034-5.722,93.572-49.126
+                    c10.146-10.137,20.736-19.463,31.558-27.572c-3.525-5.251-7.12-9.113-10.751-11.516c-1.78-1.183-3.578-1.939-5.393-2.358
+                    c-10.021,7.734-20.06,16.634-30.152,26.663c-27.465,27.394-45.673,32.226-63.278,36.89c-18.6,4.93-39.692,10.51-60.998,39.398
+                    c-3.916,5.296-8.135,14.347-5.874,27.189c2.172,12.193,10.413,33.187,56.852,74.295c4.93,4.334,10.039,8.704,15.183,12.966
+                    c-3.274,13.074-2.634,26.726,1.549,39.23c4.787,14.258,14.221,27.136,27.678,36.061c13.491,8.954,29.013,12.629,43.982,11.464
+                    c13.172-0.98,26.006-5.714,36.774-13.804c5.928,3.08,11.908,6.079,17.835,8.945c55.944,26.806,78.478,26.236,90.564,23.486
+                    c12.71-2.902,19.401-10.306,22.766-15.975c18.333-30.864,15.272-52.455,12.566-71.518c-2.546-18.04-5.18-36.711,9.398-72.64
+                    c4.646-11.552,8.473-22.668,11.552-33.428C346.138,301.727,344.466,299.876,342.151,298.337z M144.293,457.943
+                    c-10.537,0.792-21.323-1.762-30.846-8.045c-9.504-6.336-16.055-15.298-19.454-25.301c-1.869-5.652-2.687-11.57-2.474-17.498
+                    c13.1,10.155,25.275,18.956,33.944,24.688c8.65,5.75,21.484,13.545,35.938,21.662C155.987,455.941,150.22,457.481,144.293,457.943z
+                    M295.873,470.75c-16.696,28.141-128.921-36.462-158.895-56.344C107.003,394.524,3.856,316.261,23.274,289.909
+                    c7.085-9.567,13.795-15.806,20.523-20.212l-6.693,5.642c32.289,38.082,73.298,74.696,121.41,106.618
+                    c48.112,31.906,97.79,55.454,145.421,70.388l2.598-8.348C305.093,451.9,301.96,460.507,295.873,470.75z"/>
+            </g>
+        </svg>
+    </div>
+    <div class="lights top">
+        <svg viewBox="0 0 161 54">
+            <use xlink:href="#holiday-lights" />
+        </svg>
+        <svg viewBox="0 0 161 54">
+            <use xlink:href="#holiday-lights" />
+        </svg>
+        <svg viewBox="0 0 161 54">
+            <use xlink:href="#holiday-lights" />
+        </svg>
+        <svg viewBox="0 0 161 54">
+            <use xlink:href="#holiday-lights" />
+        </svg>
+        <svg viewBox="0 0 161 54">
+            <use xlink:href="#holiday-lights" />
+        </svg>
+        <svg viewBox="0 0 161 54">
+            <use xlink:href="#holiday-lights" />
+        </svg>
+    </div>
+    <div class="container">
+        <div class="bg"></div>
+        <div class="cap">
+            <img src="image/holi-cap1-edited.png" class="cap-img" alt="">
+        </div>
+        <div class="head">
+            <div class="eye left">
+                <div class="cutout"></div>
+                <div class="glass lf-gl"></div>
+            </div>
+            <div class="eye right">
+                <div class="cutout"></div>
+                <div class="glass rt-gl"></div>
+            </div>
+            <div class="mouth"></div>
+            <div class="beard"></div>
+        </div>
+        <div class="body f-body"></div>
+    </div>
+    <div class="text-section">
+        <img src="image/bell-ribbon.png" class="bell-img" alt="">
+        <div class="text-bg">
+            <h1>Journey of Lights: From Christmas Sparkles to New Year's Resolutions</h1>
+            <div class="text-flex">
+                <p>fortuneCodeHub wishes you a happy new year</p>
+                <svg viewBox="0 0 512 512" class="bell">
+                    <use xlink:href="#bell" />
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class="lights bottom">
+        <svg viewBox="0 0 161 54">
+            <use xlink:href="#holiday-lights" />
+        </svg>
+        <svg viewBox="0 0 161 54">
+            <use xlink:href="#holiday-lights" />
+        </svg>
+        <svg viewBox="0 0 161 54">
+            <use xlink:href="#holiday-lights" />
+        </svg>
+        <svg viewBox="0 0 161 54">
+            <use xlink:href="#holiday-lights" />
+        </svg>
+        <svg viewBox="0 0 161 54">
+            <use xlink:href="#holiday-lights" />
+        </svg>
+        <svg viewBox="0 0 161 54">
+            <use xlink:href="#holiday-lights" />
+        </svg>
+    </div>
+
+    <!-- JS Links -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- Custom Js -->
+    <script src="js/app.js"></script>
+</body>
+</html>
+<!-- <input type="number" name="" minlength="11" id=""> -->
